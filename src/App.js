@@ -1,24 +1,59 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { useState } from 'react';
+import { Card } from './components/Card';
 
 function App() {
+  const dataSource = [
+    {
+      title: 'Rick',
+      url: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+      description: 'Some text',
+    },
+    {
+      title: 'Rick',
+      url: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+      description: 'Some text',
+    },
+    {
+      title: 'Rick',
+      url: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+      description: 'Some text',
+    },
+  ];
+  const [characters, setCharacters] = useState([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Rick and morty</h1>
+      <button type='button' onClick={() => setCharacters(dataSource)}>
+        click me
+      </button>
+      <button
+        type='button'
+        onClick={() =>
+          setCharacters([
+            ...characters,
+            {
+              title: 'Rick',
+              url: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
+              description: 'Some text new',
+            },
+          ])
+        }
+      >
+        +1
+      </button>
+      <div className='gallery-container'>
+        {characters.map((elm, index) => (
+          <Card
+            key={index}
+            title={elm.title}
+            url={elm.url}
+            description={elm.description}
+          ></Card>
+        ))}
+      </div>
+    </>
   );
 }
 
