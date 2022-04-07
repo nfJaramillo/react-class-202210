@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useForm } from '../hooks/useForm';
 import './ContactForm.scss';
+import {DarkModeContext} from '../context/DarkModeContext';
+import  {useContext} from 'react';
 
 export const ContactForm = () => {
   const [formValues, handleInputChange] = useForm({
@@ -21,8 +23,10 @@ export const ContactForm = () => {
     console.log(formValues);
   };
 
+  const {darkMode} = useContext(DarkModeContext);
+
   return (
-    <div className='contact-container'>
+    <div className={darkMode ? `contact-container contact-container-dark` : `contact-container contact-container-light`}>
       <form className='contact-form' onSubmit={handleSubmit}>
         <h2>Contact Form</h2>
         <hr />

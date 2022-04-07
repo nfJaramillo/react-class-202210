@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from '../components/Card';
 import './Gallery.scss';
+import {DarkModeContext} from '../context/DarkModeContext';
+import  {useContext} from 'react';
 
 export const Gallery = () => {
+  const {darkMode} = useContext(DarkModeContext);
   const url = 'https://rickandmortyapi.com/api/character';
   const [characters, setCharacters] = useState([]);
 
@@ -28,7 +31,7 @@ export const Gallery = () => {
 
   return (
     <>
-      <div className='gallery'>
+      <div className={darkMode ? `galery galery-dark` : `galery galery-light`}>
         <h1>Rick and morty</h1>
         <div className='gallery-card-container'>
           {characters.map((elm, index) => (

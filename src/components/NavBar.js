@@ -1,10 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './NavBar.scss';
+import {DarkModeContext} from '../context/DarkModeContext';
+import  {useContext} from 'react';
+
 
 export const NavBar = () => {
+  const {darkMode, toggleDarkMode} = useContext(DarkModeContext);
+  const handleClick = () => {
+      toggleDarkMode();
+  }
   return (
+  <div className={darkMode ? `Navbar Navbar-dark` : `Navbar Navbar-light`}>
     <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-      <a className='navbar-brand' href='#main'>
+      <a className='navbar-brand' href='/'>
         ISIS3710
       </a>
       <button
@@ -32,6 +41,9 @@ export const NavBar = () => {
           </li>
         </ul>
       </div>
-    </nav>
+      <img className='dm-img' src={darkMode ? 
+            '/images/lightswitch-off.png' : './images/lightswitch-on.png'} alt="Lightswitch on" onClick={handleClick}/>          
+     </nav>
+    </div>
   );
 };
